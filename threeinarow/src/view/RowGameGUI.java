@@ -10,7 +10,7 @@ import model.RowGameModel;
 import controller.RowGameController;
 
 public class RowGameGUI implements RowGameView {
-	private JFrame gui = new JFrame("Three in a Row");
+	public JFrame gui = new JFrame("Three in a Row");
 	private RowGameBoardView gameBoardView;
 	private JButton reset = new JButton("Reset");
 	private RowGameStatusView gameStatusView;

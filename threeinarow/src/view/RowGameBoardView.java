@@ -16,7 +16,7 @@ import model.RowGameModel;
 
 public class RowGameBoardView implements RowGameView {
 	private JButton[][] blocks = new JButton[3][3];
-	private JPanel gamePanel = new JPanel(new FlowLayout());
+	public JPanel gamePanel = new JPanel(new FlowLayout());
 
 	public RowGameBoardView(RowGameController gameController) {
 		super();
