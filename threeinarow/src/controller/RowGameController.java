@@ -21,18 +21,26 @@ import view.RowGameGUI;
  */
 public class RowGameController {
 	public static final String GAME_END_NOWINNER = "Game ends in a draw";
+	public static final String TicTacToeString = "TicTacToe";
+	public static final String ThreeRowString = "ThreeInARow";
 
 	public RowGameModel gameModel;
 	public RowGameGUI gameView;
+	public String gameType;
 
 	/**
 	 * Creates a new game initializing the GUI.
 	 */
-	public RowGameController() {
+	public RowGameController(String gameType) {
 		gameModel = new RowGameModel();
 		gameView = new RowGameGUI(this);
+		this.gameType = gameType;
 
 		resetGame();
+	}
+
+	public static boolean isValidGameType(String gameType) {
+		return(gameType == TicTacToeString || gameType == ThreeRowString);
 	}
 
 	public RowGameModel getModel() {
@@ -174,7 +182,7 @@ public class RowGameController {
 		gameModel.blocksData[row][column].setContents(playerSymbol);
 		gameModel.blocksData[row][column].setIsLegalMove(false);
 		gameModel.player = nextPlayer;
-		if (row>0){
+		if (row>0 && gameType.equals(ThreeRowString)){
 			gameModel.blocksData[row-1][column].setIsLegalMove(true);
 		}
 		if (movesLeft < 7) {
@@ -210,7 +218,11 @@ public class RowGameController {
 			for (int column = 0; column < 3; column++) {
 				gameModel.blocksData[row][column].reset();
 				// Enable the bottom row
-				gameModel.blocksData[row][column].setIsLegalMove(row == 2);
+				if(gameType.equals(TicTacToeString)) {
+					gameModel.blocksData[row][column].setIsLegalMove(true);
+				} else {
+					gameModel.blocksData[row][column].setIsLegalMove(row == 2);
+				}
 			}
 		}
 		gameModel.player = "1";

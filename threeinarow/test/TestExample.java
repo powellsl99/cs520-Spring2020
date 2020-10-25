@@ -15,11 +15,13 @@ import controller.RowGameController;
 public class TestExample {
     private RowGameModel gameModel;
     private RowGameController gameContoller;
+    private RowGameController ticTacContoller;
 
     @Before
     public void setUp() {
     gameModel = new RowGameModel();
-    gameContoller = new RowGameController();
+    gameContoller = new RowGameController("ThreeInARow");
+    ticTacContoller = new RowGameController("TicTacToe");
     }
 
     @After
@@ -40,13 +42,13 @@ public class TestExample {
     }
 
     @Test
-    public void testIllegalMove() {
+    public void testIllegalMoveThree() {
         boolean isLegal = gameContoller.getModel().blocksData[0][0].getIsLegalMove();
         assertFalse(isLegal);
     }
 
     @Test
-    public void testLegalMove() {
+    public void testLegalMoveThree() {
         boolean isLegal = gameContoller.getModel().blocksData[2][2].getIsLegalMove();
         assertTrue(isLegal);
         gameContoller.move(2,2);
@@ -55,7 +57,7 @@ public class TestExample {
     }
 
     @Test
-    public void testWin() {
+    public void testWinThree() {
         gameContoller.move(2,2);
         gameContoller.move(2,1);
         gameContoller.move(1,2);
@@ -65,7 +67,7 @@ public class TestExample {
     }
 
     @Test
-    public void testTie() {
+    public void testTieThree() {
         gameContoller.move(2,0);
         gameContoller.move(2,2);
         gameContoller.move(2,1);
@@ -79,7 +81,7 @@ public class TestExample {
     }
 
     @Test
-    public void testReset() {
+    public void testResetThree() {
         gameContoller.move(2,0);
         gameContoller.move(2,2);
         gameContoller.move(2,1);
