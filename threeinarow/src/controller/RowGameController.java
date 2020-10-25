@@ -163,9 +163,9 @@ public class RowGameController {
 	 *            The block to be moved to by the current player
 	 */
 	public void move(int row, int column) {
-		gameModel.movesLeft = gameModel.movesLeft - 1;
+		gameModel.setMovesLeft(gameModel.getMovesLeft() - 1);
 		String player = gameModel.player;
-		int movesLeft = gameModel.movesLeft;
+		int movesLeft = gameModel.getMovesLeft();
 		String playerSymbol = getPlayerSymbol(player);
 		String playerVictoryString = getPlayerVictoryString(player);
 		String nextPlayer = getNextPlayer(player);
