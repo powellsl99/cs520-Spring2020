@@ -42,6 +42,11 @@ public class TestExample {
     }
 
     @Test
+    public void testViewThree() {
+        assertNotNull(gameContoller.getView().gameStatusView);
+    }
+
+    @Test
     public void testIllegalMoveThree() {
         boolean isLegal = gameContoller.getModel().blocksData[0][0].getIsLegalMove();
         assertFalse(isLegal);
@@ -87,5 +92,59 @@ public class TestExample {
         gameContoller.move(2,1);
         gameContoller.resetGame();
         assertEquals(9, gameContoller.getModel().getMovesLeft());
+    }
+
+    @Test
+    public void testViewTicTac() {
+        assertNotNull(ticTacContoller.getView().gameStatusView);
+    }
+
+    @Test
+    public void testIllegalMoveTicTac() {
+        ticTacContoller.move(2,0);
+        boolean isLegal = ticTacContoller.getModel().blocksData[2][0].getIsLegalMove();
+        assertFalse(isLegal);
+    }
+
+    @Test
+    public void testLegalMoveTicTac() {
+        boolean isLegal = ticTacContoller.getModel().blocksData[2][2].getIsLegalMove();
+        assertTrue(isLegal);
+        ticTacContoller.move(2,2);
+        isLegal = ticTacContoller.getModel().blocksData[2][2].getIsLegalMove();
+        assertFalse(isLegal);
+    }
+
+    @Test
+    public void testWinTicTac() {
+        ticTacContoller.move(2,2);
+        ticTacContoller.move(2,1);
+        ticTacContoller.move(1,2);
+        ticTacContoller.move(2,0);
+        ticTacContoller.move(0,2);
+        assertEquals(ticTacContoller.getPlayerVictoryString("1"), ticTacContoller.getModel().getFinalResult());
+    }
+
+    @Test
+    public void testTieTicTac() {
+        ticTacContoller.move(2,0);
+        ticTacContoller.move(2,2);
+        ticTacContoller.move(2,1);
+        ticTacContoller.move(1,0);
+        ticTacContoller.move(1,2);
+        ticTacContoller.move(1,1);
+        ticTacContoller.move(0,0);
+        ticTacContoller.move(0,2);
+        ticTacContoller.move(0,1);
+        assertEquals(ticTacContoller.getModel().getTieString(), ticTacContoller.getModel().getFinalResult());
+    }
+
+    @Test
+    public void testResetTicTac() {
+        ticTacContoller.move(2,0);
+        ticTacContoller.move(2,2);
+        ticTacContoller.move(2,1);
+        ticTacContoller.resetGame();
+        assertEquals(9, ticTacContoller.getModel().getMovesLeft());
     }
 }
