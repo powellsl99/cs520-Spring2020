@@ -23,10 +23,12 @@ public class RowGameController {
 	public static final String GAME_END_NOWINNER = "Game ends in a draw";
 	public static final String TicTacToeString = "TicTacToe";
 	public static final String ThreeRowString = "ThreeInARow";
+	public static final String PlayerOne = "1";
+	public static final String PlayerTwo = "2";
 
-	public RowGameModel gameModel;
-	public RowGameGUI gameView;
-	public String gameType;
+	private RowGameModel gameModel;
+	private RowGameGUI gameView;
+	private String gameType;
 
 	/**
 	 * Creates a new game initializing the GUI.
@@ -55,7 +57,7 @@ public class RowGameController {
 		gameView.gui.setVisible(true);
 	}
 
-	public boolean checkColumn(int rowNumber,int columnNumber){
+	private boolean checkColumn(int rowNumber,int columnNumber){
 		String currentContents = gameModel.blocksData[rowNumber][columnNumber].getContents();
 		switch(rowNumber) {
 			case 0:
@@ -72,7 +74,7 @@ public class RowGameController {
 		}
 	}
 
-	public boolean checkRow(int rowNumber, int columnNumber){
+	private boolean checkRow(int rowNumber, int columnNumber){
 		String currentContents = gameModel.blocksData[rowNumber][columnNumber].getContents();
 		switch(columnNumber) {
 			case 0:
@@ -89,7 +91,7 @@ public class RowGameController {
 		}
 	}
 
-	public boolean checkDiagonal(int rowNumber, int columnNumber){
+	private boolean checkDiagonal(int rowNumber, int columnNumber){
 		String currentContents = gameModel.blocksData[rowNumber][columnNumber].getContents();
 		if(rowNumber != columnNumber){
 			return false;
@@ -109,7 +111,7 @@ public class RowGameController {
 		}
 	}
 
-	public boolean checkReverseDiagonal(int rowNumber, int columnNumber){
+	private boolean checkReverseDiagonal(int rowNumber, int columnNumber){
 		String currentContents = gameModel.blocksData[rowNumber][columnNumber].getContents();
 		
 		switch(Integer.toString(rowNumber) + "_" + Integer.toString(columnNumber)) {
@@ -133,9 +135,9 @@ public class RowGameController {
 
 	public String getPlayerSymbol(String player) {
 		switch(player) {
-			case "1":
+			case PlayerOne:
 				return "X";
-			case "2":
+			case PlayerTwo:
 				return "O";
 			default:
 				throw new IllegalStateException("Player Number Invalid");
@@ -144,9 +146,9 @@ public class RowGameController {
 
 	public String getPlayerVictoryString(String player) {
 		switch(player) {
-			case "1":
+			case PlayerOne:
 				return "Player 1 wins!";
-			case "2":
+			case PlayerTwo:
 				return "Player 2 wins!";
 			default:
 				throw new IllegalStateException("Player Number Invalid");
@@ -155,10 +157,10 @@ public class RowGameController {
 
 	public String getNextPlayer(String player) {
 		switch(player) {
-			case "1":
-				return "2";
-			case "2":
-				return "1";
+			case PlayerOne:
+				return PlayerTwo;
+			case PlayerTwo:
+				return PlayerOne;
 			default:
 				throw new IllegalStateException("Player Number Invalid");
 		}
