@@ -18,12 +18,14 @@ public class TestExample {
 
     @Before
     public void setUp() {
-	gameModel = new RowGameModel();
+    gameModel = new RowGameModel();
+    gameContoller = new RowGameController();
     }
 
     @After
     public void tearDown() {
-	gameModel = null;
+    gameModel = null;
+    gameContoller = null;
     }
 
     @Test
@@ -37,4 +39,51 @@ public class TestExample {
 	RowBlockModel block = new RowBlockModel(null);
     }
 
+    @Test
+    public void testIllegalMove() {
+        boolean isLegal = gameContoller.getModel().blocksData[0][0].getIsLegalMove();
+        assertFalse(isLegal);
+    }
+
+    @Test
+    public void testLegalMove() {
+        boolean isLegal = gameContoller.getModel().blocksData[2][2].getIsLegalMove();
+        assertTrue(isLegal);
+        gameContoller.move(2,2);
+        isLegal = gameContoller.getModel().blocksData[2][2].getIsLegalMove();
+        assertFalse(isLegal);
+    }
+
+    @Test
+    public void testWin() {
+        gameContoller.move(2,2);
+        gameContoller.move(2,1);
+        gameContoller.move(1,2);
+        gameContoller.move(2,0);
+        gameContoller.move(0,2);
+        assertEquals(gameContoller.getPlayerVictoryString("1"), gameContoller.getModel().getFinalResult());
+    }
+
+    @Test
+    public void testTie() {
+        gameContoller.move(2,0);
+        gameContoller.move(2,2);
+        gameContoller.move(2,1);
+        gameContoller.move(1,0);
+        gameContoller.move(1,2);
+        gameContoller.move(1,1);
+        gameContoller.move(0,0);
+        gameContoller.move(0,2);
+        gameContoller.move(0,1);
+        assertEquals(gameContoller.getModel().getTieString(), gameContoller.getModel().getFinalResult());
+    }
+
+    @Test
+    public void testReset() {
+        gameContoller.move(2,0);
+        gameContoller.move(2,2);
+        gameContoller.move(2,1);
+        gameContoller.resetGame();
+        assertEquals(9, gameContoller.getModel().movesLeft);
+    }
 }

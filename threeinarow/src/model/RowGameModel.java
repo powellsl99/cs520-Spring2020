@@ -23,6 +23,9 @@ public class RowGameModel {
 		} // end for row
 	}
 
+	public String getTieString() {
+		return this.GAME_END_NOWINNER;
+	}
 	public String getFinalResult() {
 		return this.finalResult;
 	}

@@ -60,7 +60,7 @@ public class RowGameController {
 				return ((currentContents.equals(gameModel.blocksData[rowNumber-1][columnNumber].getContents())) 
 					&& (currentContents.equals(gameModel.blocksData[rowNumber-2][columnNumber].getContents())));
 			default:
-				return false;
+				throw new IllegalStateException("Row Number Invalid");
 		}
 	}
 
@@ -77,7 +77,7 @@ public class RowGameController {
 				return ((currentContents.equals(gameModel.blocksData[rowNumber][columnNumber-1].getContents())) 
 					&& (currentContents.equals(gameModel.blocksData[rowNumber][columnNumber-2].getContents())));
 			default:
-				return false;
+				throw new IllegalStateException("Column Number Invalid");
 		}
 	}
 
@@ -97,7 +97,7 @@ public class RowGameController {
 				return ((currentContents.equals(gameModel.blocksData[rowNumber-1][columnNumber-1].getContents())) 
 					&& (currentContents.equals(gameModel.blocksData[rowNumber-2][columnNumber-2].getContents())));
 			default:
-				return false;
+				throw new IllegalStateException("Column Number or Row Number Invalid");
 		}
 	}
 
@@ -163,9 +163,6 @@ public class RowGameController {
 	 *            The block to be moved to by the current player
 	 */
 	public void move(int row, int column) {
-		if(row>2 || row<0 || column<0 || column>2){
-			return;
-		}
 		gameModel.movesLeft = gameModel.movesLeft - 1;
 		String player = gameModel.player;
 		int movesLeft = gameModel.movesLeft;
@@ -173,6 +170,7 @@ public class RowGameController {
 		String playerVictoryString = getPlayerVictoryString(player);
 		String nextPlayer = getNextPlayer(player);
 
+		
 		gameModel.blocksData[row][column].setContents(playerSymbol);
 		gameModel.blocksData[row][column].setIsLegalMove(false);
 		gameModel.player = nextPlayer;
