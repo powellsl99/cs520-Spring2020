@@ -10,7 +10,7 @@ import controller.RowGameController;
 import model.RowGameModel;
 
 public class RowGameStatusView implements RowGameView {
-	public JTextArea playerturn = new JTextArea();
+	private JTextArea playerturn = new JTextArea();
 	public JPanel messages = new JPanel(new FlowLayout());
 
 	public RowGameStatusView(RowGameController gameController) {
