@@ -6,12 +6,15 @@ import static org.junit.Assert.*;
 import model.RowBlockModel;
 import model.RowGameModel;
 
+import controller.RowGameController;
+
 
 /**
  * An example test class, which merely shows how to write JUnit tests.
  */
 public class TestExample {
     private RowGameModel gameModel;
+    private RowGameController gameContoller;
 
     @Before
     public void setUp() {
@@ -33,4 +36,5 @@ public class TestExample {
     public void testNewBlockViolatesPrecondition() {
 	RowBlockModel block = new RowBlockModel(null);
     }
+
 }

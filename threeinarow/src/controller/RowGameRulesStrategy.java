@@ -3,11 +3,11 @@ package controller;
 import model.RowGameModel;
 
 public interface RowGameRulesStrategy {
-	public void reset(RowGameModel gameModel);
+	public void resetGame();
 
-	public void move(RowGameModel gameModel, int row, int col);
+	public void move(int row, int column);
 
-	public boolean isWin(RowGameModel gameModel);
+	public boolean isWin(int rowNumber, int columnNumber);
 
-	public boolean isTie(RowGameModel gameModel);
+	public boolean isTie();
 }
