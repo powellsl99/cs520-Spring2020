@@ -13,7 +13,7 @@ public class RowGameGUI implements RowGameView {
 	public JFrame gui = new JFrame("Three in a Row");
 	private RowGameBoardView gameBoardView;
 	private JButton reset = new JButton("Reset");
-	private RowGameStatusView gameStatusView;
+	public RowGameStatusView gameStatusView;
 
 	private RowGameController gameController;
 

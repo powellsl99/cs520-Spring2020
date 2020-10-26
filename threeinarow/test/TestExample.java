@@ -7,6 +7,8 @@ import model.RowBlockModel;
 import model.RowGameModel;
 
 import controller.RowGameController;
+import controller.ThreeInARowController;
+import controller.TicTacToeController;
 
 
 /**
@@ -20,8 +22,8 @@ public class TestExample {
     @Before
     public void setUp() {
     gameModel = new RowGameModel();
-    gameContoller = new RowGameController("ThreeInARow");
-    ticTacContoller = new RowGameController("TicTacToe");
+    gameContoller = new ThreeInARowController();
+    ticTacContoller = new TicTacToeController();
     }
 
     @After
