@@ -26,8 +26,8 @@ public abstract class RowGameController {
 	public static final String PlayerOne = "1";
 	public static final String PlayerTwo = "2";
 
-	public RowGameModel gameModel;
-	public RowGameGUI gameView;
+	protected RowGameModel gameModel;
+	protected RowGameGUI gameView;
 
 	/**
 	 * Creates a new game initializing the GUI.
