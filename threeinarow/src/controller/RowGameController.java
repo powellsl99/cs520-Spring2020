@@ -19,24 +19,22 @@ import view.RowGameGUI;
  * principles and needs a thorough overhaul to improve readability,
  * extensibility, and testability.
  */
-public class RowGameController {
+public abstract class RowGameController {
 	public static final String GAME_END_NOWINNER = "Game ends in a draw";
 	public static final String TicTacToeString = "TicTacToe";
 	public static final String ThreeRowString = "ThreeInARow";
 	public static final String PlayerOne = "1";
 	public static final String PlayerTwo = "2";
 
-	private RowGameModel gameModel;
-	private RowGameGUI gameView;
-	private String gameType;
+	public RowGameModel gameModel;
+	public RowGameGUI gameView;
 
 	/**
 	 * Creates a new game initializing the GUI.
 	 */
-	public RowGameController(String gameType) {
+	public RowGameController() {
 		gameModel = new RowGameModel();
 		gameView = new RowGameGUI(this);
-		this.gameType = gameType;
 
 		resetGame();
 	}
@@ -172,32 +170,7 @@ public class RowGameController {
 	 * @param block
 	 *            The block to be moved to by the current player
 	 */
-	public void move(int row, int column) {
-		gameModel.setMovesLeft(gameModel.getMovesLeft() - 1);
-		String player = gameModel.player;
-		int movesLeft = gameModel.getMovesLeft();
-		String playerSymbol = getPlayerSymbol(player);
-		String playerVictoryString = getPlayerVictoryString(player);
-		String nextPlayer = getNextPlayer(player);
-
-		
-		gameModel.blocksData[row][column].setContents(playerSymbol);
-		gameModel.blocksData[row][column].setIsLegalMove(false);
-		gameModel.player = nextPlayer;
-		if (row>0 && gameType.equals(ThreeRowString)){
-			gameModel.blocksData[row-1][column].setIsLegalMove(true);
-		}
-		if (movesLeft < 7) {
-			if(isWin(row, column)){
-				gameModel.setFinalResult(playerVictoryString);
-				endGame();
-			} else if (movesLeft == 0) {
-				gameModel.setFinalResult(GAME_END_NOWINNER);
-			}
-		}
-
-		gameView.update(gameModel);
-	}
+	public abstract void move(int row, int column);
 
 	/**
 	 * Ends the game disallowing further player turns.
@@ -215,22 +188,5 @@ public class RowGameController {
 	/**
 	 * Resets the game to be able to start playing again.
 	 */
-	public void resetGame() {
-		for (int row = 0; row < 3; row++) {
-			for (int column = 0; column < 3; column++) {
-				gameModel.blocksData[row][column].reset();
-				// Enable the bottom row
-				if(gameType.equals(TicTacToeString)) {
-					gameModel.blocksData[row][column].setIsLegalMove(true);
-				} else {
-					gameModel.blocksData[row][column].setIsLegalMove(row == 2);
-				}
-			}
-		}
-		gameModel.player = "1";
-		gameModel.movesLeft = 9;
-		gameModel.setFinalResult(null);
-
-		gameView.update(gameModel);
-	}
+	public abstract void resetGame();
 }
